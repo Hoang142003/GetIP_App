@@ -27,11 +27,11 @@ class MainActivity : AppCompatActivity() {
         )
         listView.setAdapter(arrayAdapter)
         val devicesFinder = DeviceFinder(this, object : OnDeviceFoundListener {
-            override fun onStart(deviceFinder: DeviceFinder?) {
+            override fun onStart(deviceFinder: DeviceFinder) {
                 start = System.currentTimeMillis()
             }
 
-            override fun onFinished(deviceFinder: DeviceFinder?, deviceItems: List<DeviceItem>) {
+            override fun onFinished(deviceFinder: DeviceFinder, deviceItems: List<DeviceItem>) {
                 end = System.currentTimeMillis()
                 val time: Float = (end - start) / 1000f
                 Toast.makeText(
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                 arrayAdapter.notifyDataSetChanged()
             }
 
-            override fun onFailed(deviceFinder: DeviceFinder?, errorCode: Int) {
+            override fun onFailed(deviceFinder: DeviceFinder, errorCode: Int) {
             }
         })
         devicesFinder.setTimeout(500).start()
